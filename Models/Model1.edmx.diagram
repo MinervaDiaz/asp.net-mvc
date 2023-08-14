@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="34eefe429c954dfe816eb4b0a503a055" Name="Diagram1">
+        <EntityTypeShape EntityType="TransportesModel.bitacora_camiones" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_cargamento" Width="1.5" PointX="5.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_choferes" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_direcciones" Width="1.5" PointX="7.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_paises" Width="1.5" PointX="7.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_rutas" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_usuarios" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.camiones" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.cargamento" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.choferes" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.direcciones" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.rutas" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.usuarios" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="TransportesModel.FK__rutas__fecha_lle__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="TransportesModel.FK__cargament__ruta___6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="TransportesModel.FK__rutas__chofer_id__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="TransportesModel.FK__rutas__direccion__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="TransportesModel.FK__rutas__direccion__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="TransportesModel.FK__usuarios__direcc__75A278F5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

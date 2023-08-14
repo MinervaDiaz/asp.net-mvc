@@ -1,0 +1,56 @@
+﻿@model TransportesMVC.Models.ViewModels.NuevoCamion
+@{
+    ViewBag.Title = "Nuevo_Camion";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using(Html.BeginForm("Nuevo_Camion","Camiones", FormMethod.Post)){
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.matricula)
+                @Html.TextBoxFor(d => d.matricula, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.matricula, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.tipo_camion)
+                @Html.TextBoxFor(d => d.tipo_camion, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.tipo_camion, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.marca)
+                @Html.TextBoxFor(d => d.marca, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.marca, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.modelo)
+                @Html.TextBoxFor(d => d.modelo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.modelo, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.capacidad)
+                @Html.TextBoxFor(d => d.capacidad, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.capacidad, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.kilometraje)
+                @Html.TextBoxFor(d => d.kilometraje, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.kilometraje, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.urlFoto)
+                @Html.TextBoxFor(d => d.urlFoto, "", new { @type = "file" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.disponibilidad)
+                @* HTML EN AUTOMÁTICO PONE UN CHECKBOX CON EL ATRIBUTO EDITOR FOR, POQEU DISPONIBILIDAD ES BOOLEAN *@
+                @Html.EditorFor(d => d.disponibilidad, "", new { @class = "form-control" })
+            </div>
+            <div style="text-align:right;">
+                <input value="Guardar" class="btn btn-primary" type="submit"/>
+            </div>
+        </div>
+    </div>
+}
+
