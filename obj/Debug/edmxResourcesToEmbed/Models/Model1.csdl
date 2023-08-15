@@ -272,5 +272,31 @@
       <End Role="direcciones" EntitySet="direcciones" />
       <End Role="usuarios" EntitySet="usuarios" />
     </AssociationSet>
+    <EntitySet Name="View_Rutas" EntityType="TransportesModel.View_Rutas" />
   </EntityContainer>
+  <EntityType Name="View_Rutas">
+    <Key>
+      <PropertyRef Name="camion_id" />
+      <PropertyRef Name="matricula" />
+      <PropertyRef Name="chofer" />
+      <PropertyRef Name="direcciones_origen_id" />
+      <PropertyRef Name="direcciones_origen" />
+      <PropertyRef Name="direcciones_destino_id" />
+      <PropertyRef Name="direcciones_destino" />
+      <PropertyRef Name="id_ruta" />
+    </Key>
+    <Property Name="id_ruta" Type="Int32" Nullable="false" />
+    <Property Name="camion_id" Type="Int32" Nullable="false" />
+    <Property Name="matricula" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="chofer_id" Type="Int32" />
+    <Property Name="chofer" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+    <Property Name="direcciones_origen_id" Type="Int32" Nullable="false" />
+    <Property Name="direcciones_origen" Type="String" Nullable="false" MaxLength="668" FixedLength="false" Unicode="false" />
+    <Property Name="direcciones_destino_id" Type="Int32" Nullable="false" />
+    <Property Name="direcciones_destino" Type="String" Nullable="false" MaxLength="667" FixedLength="false" Unicode="false" />
+    <Property Name="distancia" Type="Double" />
+    <Property Name="fecha_salida" Type="DateTime" Precision="3" />
+    <Property Name="fecha_llegada_estimada" Type="DateTime" Precision="3" />
+    <Property Name="fecha_llegada_real" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

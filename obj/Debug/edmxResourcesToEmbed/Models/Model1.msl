@@ -164,5 +164,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="View_Rutas">
+      <EntityTypeMapping TypeName="TransportesModel.View_Rutas">
+        <MappingFragment StoreEntitySet="View_Rutas">
+          <ScalarProperty Name="fecha_llegada_real" ColumnName="fecha_llegada_real" />
+          <ScalarProperty Name="fecha_llegada_estimada" ColumnName="fecha_llegada_estimada" />
+          <ScalarProperty Name="fecha_salida" ColumnName="fecha_salida" />
+          <ScalarProperty Name="distancia" ColumnName="distancia" />
+          <ScalarProperty Name="direcciones_destino" ColumnName="direcciones_destino" />
+          <ScalarProperty Name="direcciones_destino_id" ColumnName="direcciones_destino_id" />
+          <ScalarProperty Name="direcciones_origen" ColumnName="direcciones_origen" />
+          <ScalarProperty Name="direcciones_origen_id" ColumnName="direcciones_origen_id" />
+          <ScalarProperty Name="chofer" ColumnName="chofer" />
+          <ScalarProperty Name="chofer_id" ColumnName="chofer_id" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="camion_id" ColumnName="camion_id" />
+          <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

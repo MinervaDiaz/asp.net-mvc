@@ -25,6 +25,7 @@
         <AssociationConnector Association="TransportesModel.FK__rutas__direccion__71D1E811" ManuallyRouted="false" />
         <AssociationConnector Association="TransportesModel.FK__rutas__direccion__72C60C4A" ManuallyRouted="false" />
         <AssociationConnector Association="TransportesModel.FK__usuarios__direcc__75A278F5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TransportesModel.View_Rutas" Width="1.5" PointX="10.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

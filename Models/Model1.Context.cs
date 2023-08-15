@@ -39,5 +39,6 @@ namespace TransportesMVC.Models
         public virtual DbSet<rutas> rutas { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
+        public virtual DbSet<View_Rutas> View_Rutas { get; set; }
     }
 }

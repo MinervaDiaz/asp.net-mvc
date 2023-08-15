@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CamionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RutasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,7 +193,11 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\CamionesLista.cs" />
+    <Compile Include="Models\ViewModels\ListViewRuta.cs" />
     <Compile Include="Models\ViewModels\NuevoCamion.cs" />
+    <Compile Include="Models\View_Rutas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +275,7 @@
     <Content Include="Views\Shared\NotificationPanel.cshtml" />
     <Content Include="Views\Shared\_NotificationPanel.cshtml" />
     <Content Include="Views\Camiones\Editar_Camion.cshtml" />
+    <Content Include="Views\Rutas\IndexView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

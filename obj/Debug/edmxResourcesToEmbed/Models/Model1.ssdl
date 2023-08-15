@@ -149,6 +149,33 @@
     <Property Name="telefono" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="direccion_id" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Transportes.dbo.View_Rutas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="View_Rutas">
+    <Key>
+      <PropertyRef Name="camion_id" />
+      <PropertyRef Name="matricula" />
+      <PropertyRef Name="chofer" />
+      <PropertyRef Name="direcciones_origen_id" />
+      <PropertyRef Name="direcciones_origen" />
+      <PropertyRef Name="direcciones_destino_id" />
+      <PropertyRef Name="direcciones_destino" />
+      <PropertyRef Name="id_ruta" />
+    </Key>
+    <Property Name="id_ruta" Type="int" Nullable="false" />
+    <Property Name="camion_id" Type="int" Nullable="false" />
+    <Property Name="matricula" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="chofer_id" Type="int" />
+    <Property Name="chofer" Type="varchar" MaxLength="152" Nullable="false" />
+    <Property Name="direcciones_origen_id" Type="int" Nullable="false" />
+    <Property Name="direcciones_origen" Type="varchar" MaxLength="668" Nullable="false" />
+    <Property Name="direcciones_destino_id" Type="int" Nullable="false" />
+    <Property Name="direcciones_destino" Type="varchar" MaxLength="667" Nullable="false" />
+    <Property Name="distancia" Type="float" />
+    <Property Name="fecha_salida" Type="datetime" />
+    <Property Name="fecha_llegada_estimada" Type="datetime" />
+    <Property Name="fecha_llegada_real" Type="datetime" />
+  </EntityType>
   <Association Name="FK__cargament__ruta___6C190EBB">
     <End Role="rutas" Type="Self.rutas" Multiplicity="1" />
     <End Role="cargamento" Type="Self.cargamento" Multiplicity="*" />
@@ -236,6 +263,23 @@
     <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_Rutas" EntityType="Self.View_Rutas" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Rutas].[id_ruta] AS [id_ruta], 
+    [View_Rutas].[camion_id] AS [camion_id], 
+    [View_Rutas].[matricula] AS [matricula], 
+    [View_Rutas].[chofer_id] AS [chofer_id], 
+    [View_Rutas].[chofer] AS [chofer], 
+    [View_Rutas].[direcciones_origen_id] AS [direcciones_origen_id], 
+    [View_Rutas].[direcciones_origen] AS [direcciones_origen], 
+    [View_Rutas].[direcciones_destino_id] AS [direcciones_destino_id], 
+    [View_Rutas].[direcciones_destino] AS [direcciones_destino], 
+    [View_Rutas].[distancia] AS [distancia], 
+    [View_Rutas].[fecha_salida] AS [fecha_salida], 
+    [View_Rutas].[fecha_llegada_estimada] AS [fecha_llegada_estimada], 
+    [View_Rutas].[fecha_llegada_real] AS [fecha_llegada_real]
+    FROM [dbo].[View_Rutas] AS [View_Rutas]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK__cargament__ruta___6C190EBB" Association="Self.FK__cargament__ruta___6C190EBB">
       <End Role="rutas" EntitySet="rutas" />
       <End Role="cargamento" EntitySet="cargamento" />
