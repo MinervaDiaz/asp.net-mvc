@@ -1,12 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @* AGREGAR JS Y CSS ARRASTRANDOLO *@
+    <link href="~/Content/sweetalert2.css" rel="stylesheet" />
+    <script src="~/Scripts/sweetalert2.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -26,7 +30,10 @@
             </div>
         </div>
     </nav>
+
     <div class="container body-content">
+        @* RENDER BODY ES UN HTML HELPER, CON MVC SON USADOS PARA MODIFICAR HTML *@
+        @Html.Partial("_NotificationPanel")
         @RenderBody()
         <hr />
         <footer>

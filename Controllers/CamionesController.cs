@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 using TransportesMVC.Models;
+//TODOS LOS USING SON REFERENCIAS POR HACER REFERENCIA A OTRO LADO
 using TransportesMVC.Models.ViewModels;
+using static TransportesMVC.Models.Enum;
 
 namespace TransportesMVC.Controllers
 {
@@ -47,6 +50,7 @@ namespace TransportesMVC.Controllers
             try
             {
                 //validamos si el modelo es válido: esto es un helper para validar datos
+                //modelstate es por parte de razor
                 if (ModelState.IsValid)
                 {
                     //entro a mi contexto de la base de datos
@@ -66,15 +70,34 @@ namespace TransportesMVC.Controllers
                         //dentro del mi contexto, en el contexto de camiones se guardan los datos
                         db.camiones.Add( camion );
                         db.SaveChanges();
+                        Alert("Registro guardado con éxito", NotificationType.success);
                     }
+                    
                     //si lo anterior se hizo con éxito regreso a la vista de Camiones
                     return Redirect("~/Camiones");
                 }
+                //SI REDIRECCIONO AL VIEW MODEL ES PORQUE FALLÓ UNA VALIDACIÓN
+                Alert("Verificar la información", NotificationType.warning);
                 return View(model);
             }catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                //throw new Exception(ex.Message);
+                Alert("Ha ocurrido un error: "+ex.Message, NotificationType.error);
+                return View(model);
             }
+        }
+
+        //HELPER, STRING INCRUSTA TXT DE JAVA SCRIPT PARA EL CONTROLLER, Y CUANDO LLEGUE A LA VISTA LO INFIERA, POR MEDIO DEL VIEWDATA SE TIENE CONTROL DE ESO
+
+        //le pasamos el mensaje y el tipo de notificación
+        public void Alert(string message, NotificationType notificacionType)
+        {
+            var msg = "<script language='javascript'>Swal.fire('" +
+                notificacionType.ToString().ToUpper() + "','" + message + "','" +
+                notificacionType + "')" + "</script>";
+
+            //asignamos la propiedad notification y el mensaje
+            TempData["notification"]=msg;
         }
     }
 }
