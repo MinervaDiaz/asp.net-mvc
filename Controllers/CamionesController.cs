@@ -115,6 +115,8 @@ namespace TransportesMVC.Controllers
             ViewBag.Title = "Editar Camion n°" + camiones.id_camion;
             return View(camiones);
         }
+
+        //DELETE
         [HttpGet]
         public ActionResult Eliminar_Camion( int id)
         {
