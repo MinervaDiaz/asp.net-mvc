@@ -57,32 +57,33 @@ namespace TransportesMVC.Controllers
                     using (TransportesEntities db = new TransportesEntities())
                     {
                         var camion = new camiones();
-                        camion.id_camion= model.id_camion;
-                        camion.matricula=model.matricula;
+                        camion.id_camion = model.id_camion;
+                        camion.matricula = model.matricula;
                         camion.tipo_camion = model.tipo_camion;
-                        camion.marca=model.marca;
+                        camion.marca = model.marca;
                         camion.modelo = model.modelo;
-                        camion.capacidad=model.capacidad;
-                        camion.kilometraje=model.kilometraje;
+                        camion.capacidad = model.capacidad;
+                        camion.kilometraje = model.kilometraje;
                         camion.urlFoto = model.urlFoto;
-                        camion.disponibilidad=model.disponibilidad;
+                        camion.disponibilidad = model.disponibilidad;
 
                         //dentro del mi contexto, en el contexto de camiones se guardan los datos
-                        db.camiones.Add( camion );
+                        db.camiones.Add(camion);
                         db.SaveChanges();
                         Alert("Registro guardado con éxito", NotificationType.success);
                     }
-                    
+
                     //si lo anterior se hizo con éxito regreso a la vista de Camiones
                     return Redirect("~/Camiones");
                 }
                 //SI REDIRECCIONO AL VIEW MODEL ES PORQUE FALLÓ UNA VALIDACIÓN
                 Alert("Verificar la información", NotificationType.warning);
                 return View(model);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 //throw new Exception(ex.Message);
-                Alert("Ha ocurrido un error: "+ex.Message, NotificationType.error);
+                Alert("Ha ocurrido un error: " + ex.Message, NotificationType.error);
                 return View(model);
             }
         }
@@ -97,11 +98,12 @@ namespace TransportesMVC.Controllers
                 notificacionType + "')" + "</script>";
 
             //asignamos la propiedad notification y el mensaje
-            TempData["notification"]=msg;
+            TempData["notification"] = msg;
         }
 
 
         //EDITAR
+        [HttpPost]
         public ActionResult Editar_Camion(int id)
         {
             //llamamos al contexto, voy a trabajar con el contexto
@@ -110,10 +112,31 @@ namespace TransportesMVC.Controllers
             {
                 camiones = db.camiones.Where(x => x.id_camion == id).FirstOrDefault();
             }
-            ViewBag.Title = "Editar Camion n°"+camiones.id_camion;
+            ViewBag.Title = "Editar Camion n°" + camiones.id_camion;
             return View(camiones);
         }
-        [HttpPost]
+        [HttpGet]
+        public ActionResult Eliminar_Camion( int id)
+        {
+            camiones camion = new camiones();
+            try
+            {
+                using(TransportesEntities db= new TransportesEntities())
+                {
+                    camion = db.camiones.Where(x=>x.id_camion==id).FirstOrDefault();
+                    db.camiones.Remove(camion);
+                    db.SaveChanges();
+                }
+                Alert("Registro exitoso" , NotificationType.success);
+                return Redirect("~/Camiones");
+            }
+            catch (Exception ex)
+            {
+                Alert("Error: "+ex.Message, NotificationType.error);
+                return Redirect("~/Camiones");
+            }
+        }
+
         //Polimorfismo de los métodos de arriba y abajo, enel método de abajo regresamos la peticion de POST, arriba solo es GET
         public ActionResult Editar_Camion(camiones model)
         {
