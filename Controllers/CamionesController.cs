@@ -115,7 +115,7 @@ namespace TransportesMVC.Controllers
         }
         [HttpPost]
         //Polimorfismo de los métodos de arriba y abajo, enel método de abajo regresamos la peticion de POST, arriba solo es GET
-        public ActionResult Editar_Camion(NuevoCamion model)
+        public ActionResult Editar_Camion(camiones model)
         {
             try
             {
