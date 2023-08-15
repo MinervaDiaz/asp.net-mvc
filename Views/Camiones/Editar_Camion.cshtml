@@ -34,7 +34,7 @@
                 @Html.ValidationMessageFor(d => d.capacidad, null, new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.kilometraje)
+                @Html.LabelFor(d => d.kilometraje, new { @class = "fw-bolder" })
                 @Html.TextBoxFor(d => d.kilometraje, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.kilometraje, null, new { @class = "red" })
             </div>
