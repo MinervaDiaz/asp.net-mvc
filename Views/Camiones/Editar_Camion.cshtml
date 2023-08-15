@@ -1,15 +1,15 @@
 ﻿@model TransportesMVC.Models.ViewModels.NuevoCamion
-@{
-    ViewBag.Title = "Nuevo_Camion";
-}
 
 <h2>@ViewBag.Title</h2>
 
-@using(Html.BeginForm("Editar_Camion","Camiones", FormMethod.Post)){
+@using (Html.BeginForm("Nuevo_Camion", "Camiones", FormMethod.Post))
+{
     <div class="row">
         <div class="col-md-12">
+            @* HIDDEN FOR ESTÁ OCULTO *@
+                @Html.HiddenFor(d=>d.id_camion)
             <div>
-                @Html.LabelFor(d => d.matricula, new { @class="fw-bolder"})
+                @Html.LabelFor(d => d.matricula, new { @class = "fw-bolder" })
                 @Html.TextBoxFor(d => d.matricula, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.matricula, null, new { @class = "red" })
             </div>
@@ -48,7 +48,7 @@
                 @Html.EditorFor(d => d.disponibilidad, "", new { @class = "form-control" })
             </div>
             <div style="text-align:right;">
-                <input value="Guardar" class="btn btn-primary" type="submit"/>
+                <input value="Guardar" class="btn btn-primary" type="submit" />
             </div>
         </div>
     </div>
