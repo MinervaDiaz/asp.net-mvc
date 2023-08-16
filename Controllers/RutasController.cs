@@ -10,7 +10,13 @@ namespace TransportesMVC.Controllers
 {
     public class RutasController : Controller
     {
-        // VISTA DESDE SQL
+        //Para rutear por defecto la url de de rutas/
+        public ActionResult Index()
+        {
+            return Redirect("~/Rutas/IndexView");
+        }
+
+        // VISTA DESDE SQL (recomendable usar en estos proyectos, cuando se hace mucha consulta)
         public ActionResult IndexView()
         {
             List<ListViewRuta> lista = new List<ListViewRuta>();
@@ -38,7 +44,7 @@ namespace TransportesMVC.Controllers
             return View(lista);
         }
 
-        //FORMA DE LISTAR DE MANERA MANUAL O PERSONALIZADA
+        //LISTA PERSONALIZADA (recomendable usar en el front cuando necesite un objeto personalizado, si se hace en el server le pega más por el rendimiento : tarda más)
         public ActionResult IndexViewPersonalizado()
         {
             List<ListViewRuta> lista = new List<ListViewRuta>();
@@ -80,7 +86,7 @@ namespace TransportesMVC.Controllers
             return View(lista);
         }
 
-        //INNER JOIN en Linq
+        //INNER JOIN en Linq (cuando lo consulto una sola vez, o cuando no tenemos access a la BD)
         public ActionResult IndexViewLinQ()
         {
             List<ListViewRuta> lista = new List<ListViewRuta>();
