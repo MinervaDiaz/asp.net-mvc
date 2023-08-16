@@ -36,14 +36,9 @@
                     <td>@Elemento.capacidad</td>
                     <td>@Elemento.kilometraje</td>
                     <td>@Elemento.urlFoto</td>
-                        @if (Elemento.disponibilidad == true)
-                        {
-                        <td>Disponible</td>
-                    }
-                    else
-                    {
-                        <td>No disponible</td>
-                    }
+                    <td>
+                        <input type="checkbox" disabled="disabled" @(Elemento.disponibilidad ? "checked" : "") />
+                    </td>
                         <td>
                             <a class="btn btn-warning" href="~/Camiones/Editar_Camion/@Elemento.id_camion"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
                             <a class="btn btn-warning" href="~/Camiones/Eliminar_Camion/@Elemento.id_camion"><i class="fa-regular fa-trash-can"></i></a>
