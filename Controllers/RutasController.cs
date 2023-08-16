@@ -10,7 +10,7 @@ namespace TransportesMVC.Controllers
 {
     public class RutasController : Controller
     {
-        // GET: Rutas
+        // VISTA DESDE SQL
         public ActionResult IndexView()
         {
             List<ListViewRuta> lista = new List<ListViewRuta>();
@@ -53,8 +53,8 @@ namespace TransportesMVC.Controllers
                     aux.id_ruta = ruta.id_Ruta;
                     aux.distancia = ruta.distancia;
                     aux.fecha_salida = ruta.fecha_salida;
-                    aux.fecha_llegada_estimada = aux.fecha_llegada_estimada;
-                    aux.fecha_llegada_real = aux.fecha_llegada_real;
+                    aux.fecha_llegada_estimada = ruta.fecha_llegada_estimada;
+                    aux.fecha_llegada_real = ruta.fecha_llegada_real;
 
                     //campos referenciados
                     aux.camion_id = ruta.camion_id;
@@ -79,5 +79,39 @@ namespace TransportesMVC.Controllers
             }
             return View(lista);
         }
+
+        //INNER JOIN en Linq
+        public ActionResult IndexViewLinQ()
+        {
+            List<ListViewRuta> lista = new List<ListViewRuta>();
+            using(TransportesEntities context = new TransportesEntities())
+            {
+                lista = (from r in context.rutas
+                         join cam in context.camiones on r.camion_id equals cam.id_camion
+                         join chof in context.choferes on r.chofer_id equals chof.id_chofer
+                         join DO in context.direcciones on r.direcciones_origen_id equals DO.id_direccion
+                         join DD in context.direcciones on r.direcciones_destino_id equals DD.id_direccion
+                         //selecciono un nuevo object list view rutas
+                         select new ListViewRuta
+                         {
+                             id_ruta = r.id_Ruta,
+                             camion_id = r.camion_id,
+                             matricula = cam.matricula,
+                             chofer_id = r.chofer_id,
+                             chofer = chof.nombre + " " + chof.apellido_Paterno + " " + chof.apellido_Materno,
+                             direcciones_origen_id = r.direcciones_origen_id,
+                             direcciones_destino_id = r.direcciones_destino_id,
+                             direcciones_origen = "Calle " + DO.calle + " # " + DO.numero + " Col. " + DO.colonia + " CP." + DO.CP,
+                             direcciones_destino = "Calle " + DD.calle + " # " + DD.numero + " Col. " + DD.colonia + " CP." + DD.CP,
+                             distancia = r.distancia,
+                             fecha_salida = r.fecha_salida,
+                             fecha_llegada_estimada = r.fecha_llegada_estimada,
+                             fecha_llegada_real = r.fecha_llegada_real
+                         }
+                         ).ToList();
+            }
+            return View(lista);
+        }
     }
+
 }
