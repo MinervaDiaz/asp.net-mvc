@@ -101,9 +101,7 @@ namespace TransportesMVC.Controllers
             TempData["notification"] = msg;
         }
 
-
         //EDITAR
-        [HttpPost]
         public ActionResult Editar_Camion(int id)
         {
             //llamamos al contexto, voy a trabajar con el contexto
@@ -140,6 +138,7 @@ namespace TransportesMVC.Controllers
         }
 
         //Polimorfismo de los métodos de arriba y abajo, enel método de abajo regresamos la peticion de POST, arriba solo es GET
+        [HttpPost]
         public ActionResult Editar_Camion(camiones model)
         {
             try
