@@ -1,0 +1,35 @@
+﻿@model List<TransportesMVC.Models.ViewModels.ListViewRuta>
+@{
+    ViewBag.Title = "Lista de rutas personalizada";
+}
+
+<h3 class="mt-5 mb-2 text-secondary">@ViewBag.Title</h3>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table stripped table-bordered">
+            <tr class="bg-info">
+                <th>Id_ruta</th>
+                <th>Matricula camion</th>
+                <th>Chofer</th>
+                <th>Origen </th>
+                <th>Destino</th>
+                <th>Fecha salida</th>
+                <th>Fecha llegada estimada</th>
+                @foreach (var ruta in Model)
+                {
+                <tr>
+                    <td>@ruta.id_ruta</td>
+                    <td>@ruta.matricula</td>
+                    <td>@ruta.chofer</td>
+                    <td>@ruta.direcciones_origen</td>
+                    <td>@ruta.direcciones_destino</td>
+                    <td>@ruta.fecha_salida</td>
+                    <td>@ruta.fecha_llegada_estimada</td>
+                </tr>
+            }
+
+
+            </table>
+        </div>
+    </div>

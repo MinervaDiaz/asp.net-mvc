@@ -276,6 +276,7 @@
     <Content Include="Views\Shared\_NotificationPanel.cshtml" />
     <Content Include="Views\Camiones\Editar_Camion.cshtml" />
     <Content Include="Views\Rutas\IndexView.cshtml" />
+    <Content Include="Views\Rutas\IndexViewPersonalizado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
