@@ -194,6 +194,8 @@
     </Compile>
     <Compile Include="Models\ViewModels\CamionesDDL.cs" />
     <Compile Include="Models\ViewModels\CamionesLista.cs" />
+    <Compile Include="Models\ViewModels\ChoferesDDL.cs" />
+    <Compile Include="Models\ViewModels\DireccionesDDL.cs" />
     <Compile Include="Models\ViewModels\ListViewRuta.cs" />
     <Compile Include="Models\ViewModels\NuevaRuta.cs" />
     <Compile Include="Models\ViewModels\NuevoCamion.cs" />
@@ -281,6 +283,7 @@
     <Content Include="Views\Rutas\IndexViewPersonalizado.cshtml" />
     <Content Include="Views\Rutas\IndexViewLinQ.cshtml" />
     <Content Include="Views\Rutas\Nueva_Ruta.cshtml" />
+    <Content Include="Views\Rutas\Editar_Ruta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

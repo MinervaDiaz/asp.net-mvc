@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using TransportesMVC.Models;
 using TransportesMVC.Models.ViewModels;
 using static TransportesMVC.Models.Enum;
@@ -123,25 +125,9 @@ namespace TransportesMVC.Controllers
         //sobrecarga: dos metodos iguales, uno para la vista otro para las validaciones
         public ActionResult Nueva_Ruta()
         {
-            //aqui agregamos los ddl : crear primero el modelo CamionesDDL
-            List<CamionesDDL> listacam = new List<CamionesDDL>();
-            listacam.Insert(0, new CamionesDDL { id_camion = 0, matricula = "Seleccione un camión" });
-            using (TransportesEntities context = new TransportesEntities())
-            {
-                
-                foreach(var c in context.camiones)
-                {
-                    //por cada camion se crea un auxiliar y se añade a la lista
-                    CamionesDDL aux = new CamionesDDL();
-                    aux.id_camion = c.id_camion;
-                    aux.matricula = c.matricula;
-                    listacam.Add(aux);
-                }
-            }
-            ViewBag.ListaCamiones = listacam;
+            CargarDDL();
             return View();
         }
-
 
         [HttpPost]
         public ActionResult Nueva_Ruta(NuevaRuta model)
@@ -176,6 +162,121 @@ namespace TransportesMVC.Controllers
                 Alert("Error: ", NotificationType.error);
                 return View(model);
             }
+        }
+
+        //EDITAR
+        
+        public ActionResult Editar_Ruta(int id)
+        {
+            //llamamos al contexto, voy a trabajar con el contexto
+            rutas ruta = new rutas();
+            using (TransportesEntities db = new TransportesEntities())
+            {
+                ruta = db.rutas.Where(x => x.id_Ruta == id).FirstOrDefault();
+            }
+            ViewBag.Title = "Editar Ruta n°" + ruta.id_Ruta;
+            CargarDDL();
+            return View(ruta);
+        }
+
+        [HttpPost]
+        public ActionResult Editar_Ruta(rutas model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (TransportesEntities db = new TransportesEntities())
+                    {
+                        var rutas = new rutas();
+                        rutas.id_Ruta = model.id_Ruta;
+                        rutas.camion_id = model.camion_id;
+                        rutas.distancia = model.distancia;
+                        rutas.fecha_salida = model.fecha_salida;
+                        rutas.fecha_llegada_estimada = model.fecha_llegada_estimada;
+                        rutas.chofer_id = model.chofer_id;
+                        rutas.direcciones_origen_id = model.direcciones_origen_id;
+                        rutas.direcciones_destino_id = model.direcciones_destino_id;
+                        db.Entry(rutas).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        Alert("Actualización exitosa", NotificationType.success);
+                    }
+                    return Redirect("~/Rutas/IndexViewLinQ");
+                }
+                Alert("Verificar la información", NotificationType.warning);
+                CargarDDL();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Alert("Ha ocurrido un error: " + ex.Message, NotificationType.error);
+                return View(model);
+            }
+        }
+
+        //DELETE
+        [HttpGet]
+        public ActionResult Eliminar_Ruta(int id)
+        {
+            rutas ruta = new rutas();
+            try
+            {
+                using (TransportesEntities db = new TransportesEntities())
+                {
+                    ruta = db.rutas.Where(x => x.id_Ruta == id).FirstOrDefault();
+                    db.rutas.Remove(ruta);
+                    db.SaveChanges();
+                }
+                Alert("Eliminacion exitosa", NotificationType.success);
+                return Redirect("~/Rutas/IndexViewLinQ");
+            }
+            catch (Exception ex)
+            {
+                Alert("Error: " + ex.Message, NotificationType.error);
+                return Redirect("~/Rutas/IndexViewLinQ");
+            }
+        }
+        
+
+        public void CargarDDL()
+        {
+            //aqui agregamos los ddl : crear primero el modelo CamionesDDL
+            List<CamionesDDL> listacam = new List<CamionesDDL>();
+            listacam.Insert(0, new CamionesDDL { id_camion = 0, matricula = "Seleccione un camión" });
+            List<ChoferesDDL> listachof = new List<ChoferesDDL>();
+            listachof.Insert(0, new ChoferesDDL { id_chofer = 0, nombrechofer = "Seleccione un chofer" });
+            List<DireccionesDDL> listadirec = new List<DireccionesDDL>();
+            listadirec.Insert(0, new DireccionesDDL { id_direccion = 0, calle = "Seleccione una direccion" });
+
+            using (TransportesEntities context = new TransportesEntities())
+            {
+
+                foreach (var c in context.camiones)
+                {
+                    //por cada camion se crea un auxiliar y se añade a la lista
+                    CamionesDDL aux = new CamionesDDL();
+                    aux.id_camion = c.id_camion;
+                    aux.matricula = c.matricula;
+                    listacam.Add(aux);
+                }
+                foreach (var chof in context.choferes)
+                {
+                    ChoferesDDL aux = new ChoferesDDL();
+                    aux.id_chofer = chof.id_chofer;
+                    aux.nombrechofer = chof.nombre + " " + chof.apellido_Paterno + " " + chof.apellido_Materno;
+                    listachof.Add(aux);
+                }
+                foreach (var direc in context.direcciones)
+                {
+                    DireccionesDDL aux = new DireccionesDDL();
+                    aux.id_direccion = direc.id_direccion;
+                    aux.calle = direc.calle;
+                    listadirec.Add(aux);
+                }
+            }
+            ViewBag.ListaCamiones = listacam;
+            ViewBag.ListaChoferes = listachof;
+            ViewBag.ListaDirecciones = listadirec;
         }
 
         public void Alert(string message, NotificationType notificacionType)

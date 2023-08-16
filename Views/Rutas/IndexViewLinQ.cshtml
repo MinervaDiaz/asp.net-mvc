@@ -1,6 +1,6 @@
 ﻿@model List<TransportesMVC.Models.ViewModels.ListViewRuta>
 @{
-    ViewBag.Title = "Lista de rutas con Linq";
+    ViewBag.Title = "Lista de rutas con LinQ";
 }
 
 <h3 class="mt-5 mb-2 text-secondary">@ViewBag.Title</h3>
@@ -22,9 +22,12 @@
                 <th>Destino</th>
                 <th>Fecha salida</th>
                 <th>Fecha llegada estimada</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+
                 @foreach (var ruta in Model)
                 {
-                <tr>
+<tr>
                     <td>@ruta.id_ruta</td>
                     <td>@ruta.matricula</td>
                     <td>@ruta.chofer</td>
@@ -32,6 +35,12 @@
                     <td>@ruta.direcciones_destino</td>
                     <td>@ruta.fecha_salida</td>
                     <td>@ruta.fecha_llegada_estimada</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Rutas/Editar_Ruta/@ruta.id_ruta"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Rutas/Eliminar_Ruta/@ruta.id_ruta"><i class="fa-regular fa-trash-can"></i></a>
+                    </td>
                 </tr>
             }
 

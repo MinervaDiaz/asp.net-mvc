@@ -1,15 +1,14 @@
-﻿@model TransportesMVC.Models.ViewModels.NuevaRuta
-@{
-    ViewBag.Title = "Nueva Ruta";
-}
-
+﻿@model TransportesMVC.Models.rutas
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Nueva_Ruta", "Rutas", FormMethod.Post))
+@using (Html.BeginForm("Editar_Ruta", "Rutas", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-12">
+            @* HIDDEN FOR ESTÁ OCULTO *@
+            @Html.HiddenFor(d => d.id_Ruta)
+
             <div>
                 @Html.LabelFor(d => d.distancia)
                 @Html.TextBoxFor(d => d.distancia, null, new { @class = "form-control" })
@@ -30,7 +29,7 @@
             </div>
             <div>
                 @Html.Label("Chofer")
-                @Html.DropDownListFor(d => d.chofer_id, new SelectList(ViewBag.ListaChoferes, "id_chofer","nombrechofer"), new { @class = "form-control" })
+                @Html.DropDownListFor(d => d.chofer_id, new SelectList(ViewBag.ListaChoferes, "id_chofer", "nombrechofer"), new { @class = "form-control" })
             </div>
             <div>
                 @Html.Label("Dirección Origen")
