@@ -1,0 +1,32 @@
+﻿@model TransportesMVC.Models.ViewModels.NuevaRuta
+@{
+    ViewBag.Title = "Nueva Ruta";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Nueva_Ruta", "Rutas", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.distancia)
+                @Html.TextBoxFor(d => d.distancia, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.distancia, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.fecha_salida)
+                @Html.EditorFor(d => d.fecha_salida, "", new { @class = "date" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.fecha_llegada_estimada)
+                @Html.EditorFor(d => d.fecha_llegada_estimada, "", new { @class = "date" })
+            </div>
+
+
+        </div>
+
+    </div>
+}
+

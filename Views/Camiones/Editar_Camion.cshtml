@@ -8,6 +8,7 @@
         <div class="col-md-12">
             @* HIDDEN FOR ESTÁ OCULTO *@
                 @Html.HiddenFor(d=>d.id_camion)
+                @Html.HiddenFor(d=>d.urlFoto)
             <div>
                 @Html.LabelFor(d => d.matricula, new { @class = "fw-bolder" })
                 @Html.TextBoxFor(d => d.matricula, "", new { @class = "form-control" })

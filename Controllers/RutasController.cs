@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TransportesMVC.Models;
 using TransportesMVC.Models.ViewModels;
+using static TransportesMVC.Models.Enum;
 
 namespace TransportesMVC.Controllers
 {
@@ -32,7 +33,7 @@ namespace TransportesMVC.Controllers
                              chofer = VR.chofer,
                              direcciones_origen_id = VR.direcciones_origen_id,
                              direcciones_origen = VR.direcciones_origen,
-                             direcciones_destino_id= VR.direcciones_destino_id,
+                             direcciones_destino_id = VR.direcciones_destino_id,
                              direcciones_destino = VR.direcciones_destino,
                              distancia = VR.distancia,
                              fecha_salida = VR.fecha_salida,
@@ -52,7 +53,7 @@ namespace TransportesMVC.Controllers
             using (TransportesEntities context = new TransportesEntities())
             {
                 //vamos a usar elcontexto, ya no la VISTA
-                foreach(var ruta in context.rutas)
+                foreach (var ruta in context.rutas)
                 {
                     ListViewRuta aux = new ListViewRuta();
                     //lista de atributos que no están referenciadas
@@ -77,8 +78,8 @@ namespace TransportesMVC.Controllers
                     aux.direcciones_destino_id = ruta.direcciones_destino_id;
                     direcciones DD = (from dio in context.direcciones where dio.id_direccion == ruta.direcciones_destino_id select dio).FirstOrDefault();
 
-                    aux.direcciones_origen = "Calle "+ DO.calle + " # " + DO.numero + " Col. " + DO.colonia + " CP." + DO.CP;
-                    aux.direcciones_destino = "Calle "+ DO.calle + " # " + DO.numero + " Col. " + DO.colonia + " CP." + DO.CP;
+                    aux.direcciones_origen = "Calle " + DO.calle + " # " + DO.numero + " Col. " + DO.colonia + " CP." + DO.CP;
+                    aux.direcciones_destino = "Calle " + DO.calle + " # " + DO.numero + " Col. " + DO.colonia + " CP." + DO.CP;
 
                     lista.Add(aux);
                 }
@@ -90,7 +91,7 @@ namespace TransportesMVC.Controllers
         public ActionResult IndexViewLinQ()
         {
             List<ListViewRuta> lista = new List<ListViewRuta>();
-            using(TransportesEntities context = new TransportesEntities())
+            using (TransportesEntities context = new TransportesEntities())
             {
                 lista = (from r in context.rutas
                          join cam in context.camiones on r.camion_id equals cam.id_camion
@@ -117,6 +118,56 @@ namespace TransportesMVC.Controllers
                          ).ToList();
             }
             return View(lista);
+        }
+
+        //sobrecarga: dos metodos iguales, uno para la vista otro para las validaciones
+        public ActionResult Nueva_Ruta()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Nueva_Ruta(NuevaRuta model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    using (TransportesEntities context = new TransportesEntities())
+                    {
+                        var ruta = new rutas();
+                        ruta.camion_id = model.camion_id;
+                        ruta.distancia = model.distancia;
+                        ruta.fecha_salida = model.fecha_salida;
+                        ruta.fecha_llegada_estimada = model.fecha_llegada_estimada;
+                        ruta.fecha_llegada_real = model.fecha_llegada_real;
+                        ruta.chofer_id=model.chofer_id;
+                        ruta.direcciones_origen_id = model.direcciones_origen_id;
+                        ruta.direcciones_destino_id = model.direcciones_destino_id;
+
+                        context.rutas.Add(ruta);
+                        context.SaveChanges();
+                        Alert("Registro guardado con éxito", NotificationType.success);
+
+                    } return Redirect("~/Rutas/IndexViewLinQ");
+                }
+                Alert("Verifique la información", NotificationType.warning);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                Alert("Error: ", NotificationType.error);
+                return View(model);
+            }
+        }
+
+        public void Alert(string message, NotificationType notificacionType)
+        {
+            var msg = "<script language='javascript'>Swal.fire('" +
+                notificacionType.ToString().ToUpper() + "','" + message + "','" +
+                notificacionType + "')" + "</script>";
+
+            //asignamos la propiedad notification y el mensaje
+            TempData["notification"] = msg;
         }
     }
 
