@@ -123,8 +123,26 @@ namespace TransportesMVC.Controllers
         //sobrecarga: dos metodos iguales, uno para la vista otro para las validaciones
         public ActionResult Nueva_Ruta()
         {
+            //aqui agregamos los ddl : crear primero el modelo CamionesDDL
+            List<CamionesDDL> listacam = new List<CamionesDDL>();
+            listacam.Insert(0, new CamionesDDL { id_camion = 0, matricula = "Seleccione un camión" });
+            using (TransportesEntities context = new TransportesEntities())
+            {
+                
+                foreach(var c in context.camiones)
+                {
+                    //por cada camion se crea un auxiliar y se añade a la lista
+                    CamionesDDL aux = new CamionesDDL();
+                    aux.id_camion = c.id_camion;
+                    aux.matricula = c.matricula;
+                    listacam.Add(aux);
+                }
+            }
+            ViewBag.ListaCamiones = listacam;
             return View();
         }
+
+
         [HttpPost]
         public ActionResult Nueva_Ruta(NuevaRuta model)
         {

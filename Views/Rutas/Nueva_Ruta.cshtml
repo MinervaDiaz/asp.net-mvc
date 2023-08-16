@@ -23,6 +23,14 @@
                 @Html.LabelFor(d => d.fecha_llegada_estimada)
                 @Html.EditorFor(d => d.fecha_llegada_estimada, "", new { @class = "date" })
             </div>
+            @* NO SE USA LABELFOR PORQUE NO ES UN ATRIBUTO COMO TAL *@
+            <div>
+                @Html.Label("Camión")
+                @* USAMOS FOR PARA TRABAJAR CON ATRIBUTOS *@
+                @* CON ESTO CREAMOS UN DDL *@
+                @* LA d ES GENÉRICO, CON EL i DE UN FOR *@
+                @Html.DropDownListFor(d=>d.camion_id, new SelectList(ViewBag.ListaCamiones, "id_camion", "matricula"), new {@class="form-control"})
+            </div>
 
 
         </div>
